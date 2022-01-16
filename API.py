@@ -16,7 +16,7 @@ class App:
 		self.root.mainloop()
 	def refreshTemp(self):
 		self.temp.set(self.CalculateTemp())
-		self.root.after(60000,self.refreshTemp)
+		self.root.after(300000,self.refreshTemp)
 
 	def CalculateTemp(self):
 		tempKelvin=self.back.getTempKelvin()
