@@ -1,40 +1,29 @@
 import requests
 import json
+from tkinter import *
 
 class App:
 	def __init__(self):
+		self.root=Tk()
+		self.temp = StringVar()
+		self.temp.set("oui")
+		self.tempLabel = Label(self.root, textvariable=self.temp)
+		self.tempLabel.pack()
 		self.back=Back()
 		self.back.getConnexion()
-		action=""
-		while(action != "stop"):
-			print("\n\nLocalisation actuelle : "+self.back.getLocationName())
-			action=input("\n(1) Afficher la température\n(2) Changer la localisation\n(3) Changer les preferences\n")
-			if(action=="1"):
-				self.printTemp()
-			elif(action=="2"):
-				newLoc=input("Quelle est votre nouvelle localisation ?")
-				self.back.setLocation(newLoc)
-			elif(action=="3"):
-				self.changePreferences()
+		self.refreshTemp()
+		#self.root.overrideredirect(1)
+		self.root.mainloop()
+	def refreshTemp(self):
+		self.temp.set(self.CalculateTemp())
+		self.root.after(60000,self.refreshTemp)
 
-	def printTemp(self):
+	def CalculateTemp(self):
 		tempKelvin=self.back.getTempKelvin()
 		tempKelvinRound=round(tempKelvin,self.back.getArrondissement())
 		tempCelsius=tempKelvin - 273.15
 		tempCelsiusRound=round(tempCelsius,self.back.getArrondissement())
-		print("\n\nLa température à "+self.back.getLocationName()+" : ")
-		print(str(tempCelsiusRound)+"°C")
-		print(str(tempKelvinRound)+"°K")
-
-	def changePreferences(self):
-		action=""
-		while(action!="stop"):
-			action=input("\nBienvenue dans le menu de changement des préférences.\
-				  \nTaper le numero de la préférence que vous voulez changer (ou bien stop si vous voulez sortir du menu)\
-				  \n(1) Arrondissement de la temperautre (arrondissement actuel : "+str(self.back.getArrondissement())+")\n")
-			if(action=="1"):
-				arrondissement=input("Nouvel arrondissement : ")
-				self.back.setArrondissement(arrondissement)
+		return tempCelsiusRound
 
 class Back:
 	def __init__(self):
@@ -99,10 +88,3 @@ class Back:
 		return locationName
 
 App=App()
-App.printTemp()
-
-'''
-for element in jsonDoc :
-	print(element +" : "+ str(jsonDoc[element]))
-
-'''
