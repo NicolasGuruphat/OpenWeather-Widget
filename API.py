@@ -6,14 +6,19 @@ class App:
 	def __init__(self):
 		self.root=Tk()
 		self.temp = StringVar()
-		self.temp.set("oui")
-		self.tempLabel = Label(self.root, textvariable=self.temp)
-		self.tempLabel.pack()
 		self.back=Back()
 		self.back.getConnexion()
+		print(self.back.getLocation())
+		self.location =StringVar()
+		self.location.set(self.back.getLocationName())
+		self.tempLabel = Label(self.root, textvariable=self.temp)
+		self.tempLabel.pack()
+		self.locationLabel = Label(self.root,textvariable=self.location)
+		self.locationLabel.pack()
 		self.refreshTemp()
 		#self.root.overrideredirect(1)
 		self.root.mainloop()
+
 	def refreshTemp(self):
 		self.temp.set(self.CalculateTemp())
 		self.root.after(300000,self.refreshTemp)
