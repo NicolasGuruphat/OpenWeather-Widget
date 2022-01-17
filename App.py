@@ -30,7 +30,7 @@ class App:
 		self.root.update_idletasks()
 		self.root.overrideredirect(True)
 		
-		self.refreshTemp() #Call of the loop method
+		self.refresh() #Call of the loop method
 
 		self.root.mainloop()
 
