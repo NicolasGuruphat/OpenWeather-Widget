@@ -3,31 +3,44 @@ from Back import Back
 
 class App:
 	def __init__(self):
-		self.root=Tk()
+		self.root=Tk()#Creation of the main window 
+		
+		self.back=Back()#Creation of the back that use the API
+		self.back.getConnexion()#Creation of the connexion with the webApp
+		
+		#Construct of the window's elements
 		self.temp = StringVar()
-		self.back=Back()
-		self.back.getConnexion()
-		print(self.back.getLocation())
 		self.location =StringVar()
 		self.location.set(self.back.getLocationName())
 		self.tempLabel = Label(self.root, textvariable=self.temp)
-		self.tempLabel.pack()
 		self.locationEntry = Entry(self.root,textvariable=self.location)
-		self.locationEntry.pack()
 		self.changeLocationButton = Button(self.root, text="Change location", command=lambda : self.changeLocation())
+		self.tempLabel.pack()
+		self.locationEntry.pack()
 		self.changeLocationButton.pack()
-		self.refreshTemp()
+
+		#Root setting
 		self.root.geometry('200x200+100+100')
 		self.root.resizable(False, False)
 		self.root.update_idletasks()
 		self.root.overrideredirect(True)
+		
+		self.refreshTemp() #Call of the loop method
+
 		self.root.mainloop()
 
 	def refreshTemp(self):
+		'''
+		Refresh the temperature every t second
+		'''
+		t=300000
 		self.temp.set(self.CalculateTemp())
-		self.root.after(300000,self.refreshTemp)
+		self.root.after(t,self.refreshTemp)
 
-	def CalculateTemp(self):
+	def CalculateTemp(self): -> int
+		'''
+		Calculate and return celsius round temperature from the API data
+		'''
 		tempKelvin=self.back.getTempKelvin()
 		tempKelvinRound=round(tempKelvin,self.back.getArrondissement())
 		tempCelsius=tempKelvin - 273.15
@@ -35,6 +48,9 @@ class App:
 		return tempCelsiusRound
 
 	def changeLocation(self):
+		'''
+		Change the location that the API will call
+		'''
 		self.back.setLocation(self.locationEntry.get())
 		self.temp.set(self.CalculateTemp())
 
