@@ -13,8 +13,10 @@ class App:
 		self.location.set(self.back.getLocationName())
 		self.tempLabel = Label(self.root, textvariable=self.temp)
 		self.tempLabel.pack()
-		self.locationLabel = Label(self.root,textvariable=self.location)
-		self.locationLabel.pack()
+		self.locationEntry = Entry(self.root,textvariable=self.location)
+		self.locationEntry.pack()
+		self.changeLocationButton = Button(self.root, text="Change location", command=lambda : self.changeLocation())
+		self.changeLocationButton.pack()
 		self.refreshTemp()
 		#self.root.overrideredirect(1)
 		self.root.mainloop()
@@ -29,6 +31,10 @@ class App:
 		tempCelsius=tempKelvin - 273.15
 		tempCelsiusRound=round(tempCelsius,self.back.getArrondissement())
 		return tempCelsiusRound
+
+	def changeLocation(self):
+		self.back.setLocation(self.locationEntry.get())
+		self.temp.set(self.CalculateTemp())
 
 class Back:
 	def __init__(self):
