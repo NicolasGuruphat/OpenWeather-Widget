@@ -50,6 +50,12 @@ class Back:
 	def getMain(self):
 		return self.jsonFile["main"]
 
+	def getWeather(self):
+		return self.jsonFile["weather"]
+	
+	def getSky(self):
+		print(self.getWeather()[0]["main"])
+
 	def printAll(self):
 		print(self.jsonFile)
 
