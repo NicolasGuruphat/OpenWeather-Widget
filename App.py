@@ -8,7 +8,7 @@ class App:
 		
 		self.back=Back()#Creation of the back that use the API
 		self.back.getConnexion()#Creation of the connexion with the webApp
-		
+		self.back.printAll()
 		#Construct of the window's elements
 		self.temp = StringVar()
 		self.location =StringVar()
@@ -38,7 +38,7 @@ class App:
 		self.temp.set(self.CalculateTemp())
 		self.root.after(t,self.refreshTemp)
 
-	def CalculateTemp(self): -> int
+	def CalculateTemp(self) -> int :
 		'''
 		Calculate and return celsius round temperature from the API data
 		'''
