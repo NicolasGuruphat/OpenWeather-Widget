@@ -18,7 +18,10 @@ class App:
 		self.changeLocationButton = Button(self.root, text="Change location", command=lambda : self.changeLocation())
 		self.changeLocationButton.pack()
 		self.refreshTemp()
-		#self.root.overrideredirect(1)
+		self.root.geometry('200x200+100+100')
+		self.root.resizable(False, False)
+		self.root.update_idletasks()
+		self.root.overrideredirect(True)
 		self.root.mainloop()
 
 	def refreshTemp(self):
