@@ -32,7 +32,7 @@ class App:
 
 	def refreshTemp(self):
 		'''
-		Refresh the temperature every t second
+		Refresh the temperature every t miiliseconds
 		'''
 		t=300000
 		self.temp.set(self.CalculateTemp())
