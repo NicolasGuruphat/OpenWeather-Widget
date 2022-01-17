@@ -2,6 +2,7 @@ from tkinter import *
 from Back import Back
 
 class App:
+	
 	def __init__(self):
 		self.root=Tk()#Creation of the main window 
 		
