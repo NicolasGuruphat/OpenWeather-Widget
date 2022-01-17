@@ -54,7 +54,7 @@ class Back:
 		return self.jsonFile["weather"]
 	
 	def getSky(self):
-		print(self.getWeather()[0]["main"])
+		return self.getWeather()[0]["main"]
 
 	def printAll(self):
 		print(self.jsonFile)

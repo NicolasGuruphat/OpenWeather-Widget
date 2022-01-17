@@ -13,13 +13,16 @@ class App:
 		#Construct of the window's elements
 		self.temp = StringVar()
 		self.location =StringVar()
+		self.sky =StringVar()
 		self.location.set(self.back.getLocationName())
 		self.tempLabel = Label(self.root, textvariable=self.temp)
 		self.locationEntry = Entry(self.root,textvariable=self.location)
 		self.changeLocationButton = Button(self.root, text="Change location", command=lambda : self.changeLocation())
+		self.skyLabel=Label(self.root, textvariable=self.sky)
 		self.tempLabel.pack()
 		self.locationEntry.pack()
 		self.changeLocationButton.pack()
+		self.skyLabel.pack()
 
 		#Root setting
 		self.root.geometry('200x200+100+100')
@@ -31,12 +34,13 @@ class App:
 
 		self.root.mainloop()
 
-	def refreshTemp(self):
+	def refresh(self):
 		'''
-		Refresh the temperature every t miiliseconds
+		Refresh data every t milliseconds
 		'''
 		t=300000
 		self.temp.set(self.CalculateTemp())
+		self.sky.set(self.back.getSky())
 		self.root.after(t,self.refreshTemp)
 
 	def CalculateTemp(self) -> int :
