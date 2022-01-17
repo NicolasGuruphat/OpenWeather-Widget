@@ -41,7 +41,7 @@ class App:
 		t=300000
 		self.temp.set(self.CalculateTemp())
 		self.sky.set(self.back.getSky())
-		self.root.after(t,self.refreshTemp)
+		self.root.after(t,self.refresh)
 
 	def CalculateTemp(self) -> int :
 		'''
