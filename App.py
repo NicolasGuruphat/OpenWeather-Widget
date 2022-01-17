@@ -8,8 +8,7 @@ class App:
 		
 		self.back=Back()#Creation of the back that use the API
 		self.back.getConnexion()#Creation of the connexion with the webApp
-		#self.back.printAll()
-		self.back.getSky()
+
 		#Construct of the window's elements
 		self.temp = StringVar()
 		self.location =StringVar()
@@ -59,6 +58,7 @@ class App:
 		'''
 		self.back.setLocation(self.locationEntry.get())
 		self.temp.set(self.CalculateTemp())
+		self.sky.set(self.back.getSky())
 
 
 App=App()
