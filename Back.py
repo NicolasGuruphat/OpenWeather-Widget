@@ -53,11 +53,9 @@ class Back:
 	def printAll(self):
 		print(self.jsonFile)
 
-
 	def getTempKelvin(self):
-		tempKelvin=self.getMain()["temp"]
-		return tempKelvin
+		return self.getMain()["temp"]
 
 	def getLocationName(self):
-		locationName=self.jsonFile["name"]
-		return locationName
+		return self.jsonFile["name"]
+
